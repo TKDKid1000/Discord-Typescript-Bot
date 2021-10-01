@@ -1,0 +1,23 @@
+{
+    "token": "token",
+    "clientid": "clientid",
+    "guild": "guildid",
+    "roles": {
+        "default": "Default"
+    },
+    "channels": {
+        "rules": "rules📔",
+        "welcome": "welcome"
+    },
+    "music": {
+        "loadCacheTime": 5000
+    },
+    "messages": {
+        "welcome": "Welcome @user to The Epic server! Have fun!",
+        "levelup": "**@user leveled up!**"
+    },
+    "levels": {
+        "random": [10, 25],
+        "xp": 1000
+    }
+}

@@ -1,0 +1,18 @@
+1. Use your common sense when it comes to rules.
+2. If you have any problems, notify an admin or use ./report <username> <reason>
+3. Don't spam on any channels.
+4. Swearing is allowed, but don't use it excessively or use it to insult other people.
+4 1/2. ABSOLUTELY NO RACIAL, HOMOPHOBIC OR GENDER SLURS. (Instant permanent ban)
+5. Don't test us. These rules are simple, but we enforce them strongly.
+6. Punishment System:
+
+Infraction 1. Warning
+Infraction 2. Warning
+Infraction 3. 1 hour mute
+Infraction 4. 1 day mute
+Infraction 5. Kick
+Infraction 6. 1 day tempban
+Infraction 7. Permanent ban
+7. Avoiding bans/mutes on alt accounts will result in a ban.
+
+Please! Invite your friends, send them this link: https://discord.gg/dvKTpCKBFC

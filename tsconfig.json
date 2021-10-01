@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "target": "ES2015",
+        "rootDir": "./src",
+        "outDir": "./app",
+        "typeRoots": ["./node_modules/@types"],
+        "moduleResolution": "node",
+        "esModuleInterop": true
+    },
+    "include": ["./src", "./node_modules/@types/"],
+    "exclude": ["./node_modules"],
+}
