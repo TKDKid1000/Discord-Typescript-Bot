@@ -8,7 +8,6 @@ export default function(client: Client) {
             getPunishments().filter((p) => p.endDate <= Date.now()).forEach(async punishment => {
                 punishments = punishments.filter(p => p !== punishment)
                 const guild = client.guilds.cache.get(punishment.guild)
-                console.log(punishment)
                 switch (punishment.type) {
                     case PunishmentType.BAN: {
                         try {
@@ -22,7 +21,6 @@ export default function(client: Client) {
                     }
                 }
             })
-            console.log(punishments)
             savePunishments(punishments)
         }, 5000)
     })

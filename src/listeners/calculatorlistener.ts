@@ -19,6 +19,7 @@ export default function(client: Client) {
             var calc = calculators.get(interaction.message.id)
             if (calc === undefined) 
                 calculators.set(interaction.message.id, {equation: "", error: ""})
+                calc = calculators.get(interaction.message.id)
             calc.error = ""
             const message = <Message>interaction.message
             switch (interaction.customId) {

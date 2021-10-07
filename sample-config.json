@@ -19,5 +19,9 @@
     "levels": {
         "random": [10, 25],
         "xp": 1000
+    },
+    "log": {
+        "enabled": true,
+        "channel": "audit-log"
     }
 }

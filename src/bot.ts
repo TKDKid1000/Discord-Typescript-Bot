@@ -6,6 +6,7 @@ import * as path from "path"
 import { REST } from "@discordjs/rest"
 import { Routes } from "discord-api-types/v9"
 import Command from "./command"
+import { logger } from "./logger"
 
 const client = new Client({
     intents: [
@@ -42,26 +43,30 @@ const commandBuilders: Array<SlashCommandBuilder> = (() => {
 })()
 
 client.on("ready", () => {
-    console.log(`Logged in as ${client.user.tag}`)
+    logger.info(`Logged in as ${client.user.tag}`)
     const rest = new REST({version:"9"})
     rest.setToken(config["token"])
     rest.put(
         Routes.applicationGuildCommands(client.application.id, config["guild"]),
         { body: commandBuilders }
     )
-    // rest.get(Routes.applicationGuildCommands(client.application.id, config["guild"])).then(console.log).catch(console.error)
+})
+
+client.on("rateLimit", async rateLimit => {
+    logger.error(`Bot rate limited for ${rateLimit.timeout}`)
 })
 
 client.on("interactionCreate", async interaction => {
     if (interaction != null) {
         if (interaction.isCommand()) {
-            commands.forEach(command => {
-                if (interaction.commandName === command.builder.name) {
-                    command.execution.execute(interaction)
-                }
-            })
+            logger.info(`${interaction.user.id} executed command ${interaction.commandName}`)
+            const command = commands.find(command => interaction.commandName === command.builder.name)
+            if (command) 
+                command.execution.execute(interaction)
         }
     }
 })
 
 client.login(config["token"])
+
+export {client}
