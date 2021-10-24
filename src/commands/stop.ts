@@ -11,7 +11,7 @@ export default new Command(<SlashCommandBuilder>new SlashCommandBuilder().setNam
     const connection: VoiceConnection = getVoiceConnection(guild.id)
     if (connection != null) {
         var audioResources: AudioResource[] = playlist.get(guild.id)
-        audioResources.shift()
+        audioResources = []
         playlist.set(guild.id, audioResources)
         connection.destroy()
         await interaction.reply({embeds: [new MessageEmbed().setTitle("Music").setDescription(`:musical_note: Stopped playing music`).setAuthor(interaction.client.user.username).setColor("BLUE")]})
