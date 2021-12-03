@@ -46,10 +46,19 @@ client.on("ready", () => {
     logger.info(`Logged in as ${client.user.tag}`)
     const rest = new REST({version:"9"})
     rest.setToken(config["token"])
-    rest.put(
-        Routes.applicationGuildCommands(client.application.id, config["guild"]),
-        { body: commandBuilders }
-    )
+    if (process.env.NODE_ENV === "production") {
+        rest.put(
+            Routes.applicationCommands(client.application.id),
+            { body: commandBuilders }
+        )
+        logger.info("Registered public slash commands")
+    } else {
+        rest.put(
+            Routes.applicationGuildCommands(client.application.id, config["guild"]),
+            { body: commandBuilders }
+        )
+        logger.info("Registered guild slash commands")
+    }
 })
 
 client.on("rateLimit", async rateLimit => {

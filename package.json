@@ -6,7 +6,8 @@
     "start": "node app/bot.js",
     "build": "tsc",
     "watch": "nodemon",
-    "clean": "node scripts/clean.js"
+    "clean": "node scripts/clean.js",
+    "production": "NODE_ENV=production node app/bot.js"
   },
   "keywords": [],
   "author": "",
