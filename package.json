@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node app/bot.js",
     "build": "tsc",
+    "watch": "nodemon",
     "clean": "node scripts/clean.js"
   },
   "keywords": [],
@@ -34,6 +35,7 @@
     "@types/ms": "^0.7.31",
     "@types/node": "^16.11.4",
     "@types/yt-search": "^2.3.2",
+    "nodemon": "^2.0.15",
     "typescript": "^4.4.2"
   }
 }

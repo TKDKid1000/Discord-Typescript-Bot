@@ -1,7 +1,5 @@
 import db from "./database"
 
-if (!db.exists("/punishments")) db.push("/punishments", [])
-
 interface Punishment {
     guild: string,
     user: string,
@@ -16,12 +14,19 @@ enum PunishmentType {
     MUTE
 }
 
-function savePunishments(punishments: Punishment[]) {
-    db.push("/punishments", punishments)
+function savePunishments(punishments: Punishment[], serverId: string) {
+    if (!db.exists(`/punishments/${serverId}`)) db.push(`/punishments/${serverId}`, [])    
+    db.push(`/punishments/${serverId}`, punishments)
 }
 
-function getPunishments(): Punishment[] {
-    return <Punishment[]>db.getData("/punishments")
+function getPunishments(serverId: string): Punishment[] {
+    if (!db.exists(`/punishments/${serverId}`)) db.push(`/punishments/${serverId}`, [])    
+    return <Punishment[]>db.getData(`/punishments/${serverId}`)
 }
 
-export {Punishment, PunishmentType, savePunishments, getPunishments}
+function getAllPunishments(): Record<string, Punishment[]> {
+    if (!db.exists("/punishments")) return {}
+    return db.getObject("/punishments")
+}
+
+export {Punishment, PunishmentType, savePunishments, getPunishments, getAllPunishments}

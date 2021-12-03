@@ -9,7 +9,7 @@ export default function(client: Client) {
         const channel = message.channel
         const author = message.author
         if (author.bot) return
-        const user = getUser(author.id)
+        const user = getUser(author.id, message.guildId)
         if (user) {
             const xp = randomInt(config["levels"]["random"][0], config["levels"]["random"][1])
             user.xp += xp
@@ -18,9 +18,9 @@ export default function(client: Client) {
                 user.level += 1
                 await channel.send({embeds: [new MessageEmbed().setTitle("Levels").setDescription(`:trophy: ${String(config["messages"]["levelup"]).replace("@user", userMention(user.id))}`).setAuthor(client.user.username).setColor("BLUE").addField("Level", String(user.level), true)], components: []})
             }
-            saveUser(user)
+            saveUser(user, message.guildId)
         } else {
-            saveUser({id: author.id, level: 1, xp: 1})
+            saveUser({id: author.id, level: 1, xp: 1}, message.guildId)
         }
     })
 }

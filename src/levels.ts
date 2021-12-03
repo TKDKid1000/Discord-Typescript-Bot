@@ -1,28 +1,29 @@
 import db from "./database"
 
-if (!db.exists("/levels")) db.push("/levels", [])
-
 interface User {
     id: string,
     level: number,
     xp: number
 }
 
-function saveUser(user: User) {
-    if (getUser(user.id)) {
-        db.push(`/levels[${getUsers().indexOf(user)}]`, user)
+function saveUser(user: User, serverId: string) {
+    if (!db.exists(`/levels/${serverId}`)) db.push(`/levels/${serverId}`, [])    
+    if (getUser(user.id, serverId)) {
+        db.push(`/levels/${serverId}[${getUsers(serverId).indexOf(user)}]`, user)
     } else {
-        db.push("/levels[]", user)
+        db.push(`/levels/${serverId}[]`, user)
     }
 }
 
-function getUser(id: string): User | undefined {
-    const user = getUsers().find(user => user.id === id)
+function getUser(id: string, serverId: string): User | undefined {
+    if (!db.exists(`/levels/${serverId}`)) db.push(`/levels/${serverId}`, [])    
+    const user = getUsers(serverId).find(user => user.id === id)
     return user
 }
 
-function getUsers(): User[] {
-    return <User[]>db.getData("/levels")
+function getUsers(serverId: string): User[] {
+    if (!db.exists(`/levels/${serverId}`)) db.push(`/levels/${serverId}`, [])    
+    return <User[]>db.getData(`/levels/${serverId}`)
 }
 
 export {User, saveUser, getUser, getUsers}

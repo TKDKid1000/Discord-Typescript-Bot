@@ -6,7 +6,7 @@ import { getUser, User } from "../levels"
 export default new Command(<SlashCommandBuilder>new SlashCommandBuilder().setName("rank").setDescription("Shows your level").addUserOption(option => option.setName("user").setDescription("User to get level").setRequired(false)), new Execution(async interaction => {
     var member = interaction.options.getUser("user", false)
     if (!member) member = interaction.user
-    const user = getUser(member.id)
+    const user = getUser(member.id, interaction.guildId)
     if (user) {
         await interaction.reply({embeds: [new MessageEmbed().setTitle("Levels").setDescription(`:trophy: **${userMention(member.id)}'s Level**`).setAuthor(interaction.client.user.username).setColor("BLUE").addField("Level", String(user.level), true).addField("Experience", String(user.xp), true)], components: []})
     } else {

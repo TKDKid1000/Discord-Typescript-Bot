@@ -16,7 +16,7 @@ export default new Command(<SlashCommandBuilder>new SlashCommandBuilder().setNam
             if (!banTime) {
                 await interaction.reply({embeds: [new MessageEmbed().setTitle("Moderation").setDescription(`:shield: ${userMention(member.id)} was permanently banned`).setAuthor(interaction.client.user.username).setColor("BLUE")], components: []})
             } else {
-                var punishments = getPunishments()
+                var punishments = getPunishments(guild.id)
                 punishments.push({
                     author: interaction.user.id,
                     user: member.id,

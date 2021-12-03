@@ -3,31 +3,9 @@ import config from "../config"
 import fs from "fs"
 
 export default function(client: Client) {
-    client.on("ready", async () => {
-        client.guilds.cache.forEach(async (guild) => {
-            const channel = <TextChannel>guild.channels.cache.find(channel => channel.name === config["channels"]["rules"])
-            if (channel) {
-                const sent = (await channel.messages.fetch({limit: 1})).first().author.id === client.user.id
-                if (sent) (await channel.messages.fetch({limit: 1})).first().delete()
-                const row = new MessageActionRow()
-                .addComponents(
-                    new MessageButton()
-                    .setCustomId("rulesbutton")
-                    .setStyle("SUCCESS")
-                    .setLabel("Accept Rules")
-                )
-                const embed = new MessageEmbed()
-                .setColor("BLUE")
-                .setTitle("Rules")
-                .setDescription(fs.readFileSync("./rules.txt").toString())
-                await channel.send({embeds: [embed], components: [row]})
-            }
-        })
-    })
-
     client.on("interactionCreate", async interaction => {
         if (interaction.isButton()) {
-            if (interaction.customId === "rulesbutton") {
+            if (interaction.customId === "Rules.Accept") {
                 const guild = interaction.guild
                 const role = guild.roles.cache.find(role => role.name === config["roles"]["default"])
                 const member = <GuildMember>interaction.member

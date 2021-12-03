@@ -5,7 +5,7 @@ import config from "../config"
 import { getUsers } from "../levels"
 
 export default new Command(new SlashCommandBuilder().setName("levels").setDescription("Shows global level top"), new Execution(async interaction => {
-    const users = getUsers()
+    const users = getUsers(interaction.guildId)
     const leaderboard = users.sort((a, b) => a.level*config["levels"]["xp"]+a.xp - b.level*config["levels"]["xp"]+b.xp).reverse().slice(0, 5)
     var leaderboardString: string[] = new Array<string>()
     leaderboard.forEach((leaderboardUser, index) => {
